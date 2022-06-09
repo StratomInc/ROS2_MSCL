@@ -130,7 +130,8 @@ include_directories(${CMAKE_SOURCE_DIR}/include/ros2_mscl ${MIPLIBINC} ${MIPUTIL
 # Executables/Linking
 add_executable(ros2_mscl_node src/microstrain_3dm.cpp src/microstrain_3dm_node.cpp)
 ament_target_dependencies(ros2_mscl_node rclcpp rclcpp_lifecycle std_msgs std_srvs lifecycle_msgs sensor_msgs geometry_msgs nav_msgs tf2 tf2_ros tf2_geometry_msgs ros2_mscl_msgs) 
-rosidl_target_interfaces(ros2_mscl_node ${PROJECT_NAME} "rosidl_typesupport_cpp")
+rosidl_get_typesupport_target(cpp_typesupport_target "${PROJECT_NAME}" "rosidl_typesupport_cpp")
+target_link_libraries(ros2_mscl_node "${cpp_typesupport_target}")
 target_link_libraries(ros2_mscl_node ${MSCL_LIB_PATH})
 
 #############
